@@ -21,6 +21,14 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+  margin-bottom: 0.5em;
+  line-height: 1.6;
+}
 
 .Layout {
   .Navbar {
@@ -56,4 +64,47 @@ code {
       }
     }
   }
+}
+
+.BurgerBuilder {
+  &__burger-wrapper {
+    height: 300px;
+    background: lightblue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .Burger {
+      background: lightpink;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .Ingredient {
+        background: turquoise;
+        margin: 0.5em;
+      }
+    }
+  }
+  .BuildControls {
+    background: rgb(202, 154, 76);
+    padding: 2em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    &__price {
+      span {
+        font-weight: bold;
+      }
+    }
+    .BuildControl {
+      display: flex;
+      justify-content: space-between;
+      label {
+        width: 5em;
+      }
+    }
+  }
+}
+
+.Button {
+  font: inherit;
 }
