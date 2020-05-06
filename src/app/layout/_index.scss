@@ -1,0 +1,86 @@
+.Layout {
+  padding-top: var(--height-navbar);
+
+  .Navbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--height-navbar);
+    background: rgb(167, 108, 42);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1.25em;
+    @include media-sm() {
+      justify-content: space-around;
+    }
+
+    .MenuIcon {
+      margin: 0.5em;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      &__line {
+        width: 100%;
+        height: 4px;
+        background: white;
+        border-radius: 2px;
+      }
+      &:hover {
+        cursor: pointer;
+      }
+      @include media-sm() {
+        display: none;
+      }
+    }
+
+    .Navbar__Logo {
+      width: 90px;
+    }
+
+    .NavItems {
+      display: none;
+      @include media-sm() {
+        display: flex;
+      }
+    }
+  }
+  .SideDrawer {
+    nav {
+      position: fixed;
+      z-index: var(--z-side-drawer);
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: 80%;
+      background: var(--cl-light);
+      transform: translateX(-100%);
+      transition: transform 250ms ease-in-out;
+      &.open {
+        transform: translateX(0);
+      }
+    }
+  }
+  .Layout_main {
+  }
+  .NavItems {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-around;
+    list-style-type: none;
+    @include media-sm {
+      flex-direction: row;
+      align-items: center;
+    }
+    .NavItem {
+      margin-left: 0.5em;
+      a {
+        text-decoration: none;
+      }
+    }
+  }
+}

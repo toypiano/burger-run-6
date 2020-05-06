@@ -6,12 +6,21 @@ import SideDrawer from './SideDrawer';
 function Layout({ children }) {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
+  const openDrawer = () => {
+    setIsDrawerOpen(true);
+  };
+
+  const closeDrawer = () => {
+    setIsDrawerOpen(false);
+  };
   return (
     <div className="Layout">
-      <Navbar openDrawer={() => setIsDrawerOpen(true)} />
-      {isDrawerOpen && (
-        <SideDrawer closeDrawer={() => setIsDrawerOpen(false)} />
-      )}
+      <Navbar openDrawer={openDrawer} />
+      <SideDrawer
+        isOpen={isDrawerOpen}
+        openDrawer={openDrawer}
+        closeDrawer={closeDrawer}
+      />
       <main className="Layout__main">{children}</main>
     </div>
   );

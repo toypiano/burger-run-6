@@ -1,23 +1,73 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Burger from './burger/Burger';
 import BuildControls from './buildControls/BuildControls';
+import { connect } from 'react-redux';
 
-const initialIngredients = {
-  salad: 1,
-  bacon: 1,
-  cheese: 1,
-  meat: 1,
-};
+import * as actionCreators from '../../app/ducks/burgerBuilder';
 
-function BurgerBuilder() {
+import Spinner from '../../common/ui/Spinner';
+import Modal from '../../common/ui/Modal';
+import OrderSummary from './OrderSummary';
+
+export function BurgerBuilder({
+  match,
+  history,
+  ingredients,
+  price,
+  addIngredient,
+  removeIngredient,
+  fetchIngredients,
+  isOrdering,
+  beginOrder,
+  cancelOrder,
+}) {
+  const [isLoading, setIsLoading] = useState(true);
+  const [isFetched, setIsFetched] = useState(false);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        await fetchIngredients();
+        setIsFetched(true);
+      } catch (err) {}
+      setIsLoading(false);
+    })();
+  }, [fetchIngredients, cancelOrder]);
+
+  const proceedToOrder = () => {
+    history.push('/checkout');
+  };
+
   return (
     <div className="BurgerBuilder">
+      <Spinner show={isLoading} />
+      <Modal show={isFetched && isOrdering} closeModal={cancelOrder}>
+        <OrderSummary
+          ingredients={ingredients}
+          cancelOrder={cancelOrder}
+          continueOrder={proceedToOrder}
+        />
+      </Modal>
       <section className="BurgerBuilder__burger-wrapper">
-        <Burger ingredients={initialIngredients} />
+        <Burger ingredients={ingredients} />
       </section>
-      <BuildControls price={4.99} ingredients={initialIngredients} />
+      <BuildControls
+        price={price}
+        ingredients={ingredients}
+        add={addIngredient}
+        remove={removeIngredient}
+        beginOrder={beginOrder}
+      />
     </div>
   );
 }
 
-export default BurgerBuilder;
+const mapState = (state) => {
+  const {
+    burgerBuilder: { ingredients, price, isOrdering },
+  } = state;
+
+  return { ingredients, price, isOrdering };
+};
+
+export default connect(mapState, actionCreators)(BurgerBuilder);

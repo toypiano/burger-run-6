@@ -4,11 +4,11 @@ import NavItems from './NavItems';
 
 import { ReactComponent as Logo } from '../../common/images/a-w.svg';
 
-export default function Navbar() {
+export default function Navbar({ openDrawer }) {
   return (
     <div className="Navbar">
-      <MenuIcon />
-      <Logo className="Navbar__Logo" width="100" height="50" />
+      <MenuIcon handleClick={openDrawer} />
+      <Logo className="Navbar__Logo" />
       <NavItems />
     </div>
   );
