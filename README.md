@@ -26,6 +26,44 @@
   - default export Container
     - use utility function to update displayName
 - [Redux Ducks snippet](https://gist.github.com/toypiano/5422dc229235b515e5b7f3763198fe5d)
+- `useHistory` & `useRouteMatch` with `<Route>`
+  - can use history object from children component inside `<Route>`
+  - If you are using hooks, use `useHistory` instead of other Route render methods (component, render, children: Fn )
+  - Route's `component={Component}` **creates new React element with `React.createElement()`** -> unmounts existing component and mount the new one (instead of updating it) 🤭💩🤷🏻‍♂️
+    - That's why it takes Component instead of `<Component>`
+  - Before hooks, you could avoid this behavior by using
+
+```jsx
+function FadingRoute({ component: Component, ...rest }) {
+  return (
+    <Route
+      {...rest}
+      render={(routeProps) => (
+        <FadeIn>
+          <Component {...routeProps} />
+        </FadeIn>
+      )}
+    />
+  );
+}
+```
+
+or
+
+```jsx
+function ListItemLink({ to, ...rest }) {
+  return (
+    <Route
+      path={to}
+      children={({ match }) => (
+        <li className={match ? 'active' : ''}>
+          <Link to={to} {...rest} />
+        </li>
+      )}
+    />
+  );
+}
+```
 
 ## Components
 

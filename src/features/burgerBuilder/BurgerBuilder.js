@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Burger from './burger/Burger';
 import BuildControls from './buildControls/BuildControls';
 import { connect } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 import * as actionCreators from '../../app/ducks/burgerBuilder';
 
@@ -10,8 +11,6 @@ import Modal from '../../common/ui/Modal';
 import OrderSummary from './OrderSummary';
 
 export function BurgerBuilder({
-  match,
-  history,
   ingredients,
   price,
   addIngredient,
@@ -23,6 +22,7 @@ export function BurgerBuilder({
 }) {
   const [isLoading, setIsLoading] = useState(true);
   const [isFetched, setIsFetched] = useState(false);
+  const history = useHistory();
 
   useEffect(() => {
     (async () => {
