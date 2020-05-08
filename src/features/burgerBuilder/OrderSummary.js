@@ -5,7 +5,7 @@ import Button from '../../common/ui/Button';
  * Show selected ingredients with cancel & continue Button
  * @param {*} ingredients object of ingredients
  */
-function OrderSummary({ ingredients, cancelOrder, continueOrder }) {
+function OrderSummary({ ingredients, cancelOrder, proceedToCheckout }) {
   const ingredientLists = Object.entries(ingredients).map(([ing, qty]) => (
     <li key={ing}>
       <span className="OrderSummary__ingredient">{ing}</span>
@@ -19,7 +19,7 @@ function OrderSummary({ ingredients, cancelOrder, continueOrder }) {
       <ul>{ingredientLists}</ul>
       <div className="OrderSummary__buttons">
         <Button handleClick={cancelOrder}>Cancel</Button>
-        <Button handleClick={continueOrder}>Continue</Button>
+        <Button handleClick={proceedToCheckout}>Continue</Button>
       </div>
     </div>
   );

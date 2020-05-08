@@ -7,6 +7,7 @@ const REMOVE_INGREDIENT = 'burgerBuilder/removeIngredient';
 const FETCH_INGREDIENTS_SUCCESS = 'burgerBuilder/fetchIngredientSuccess';
 const FETCH_INGREDIENTS_FAIL = 'burgerBuilder/fetchIngredientFail';
 const BEGIN_ORDER = 'burgerBuilder/beginOrder';
+const SIGN_IN_TO_ORDER = 'burgerBuilder/signInToOrder';
 const CANCEL_ORDER = 'burgerBuilder/cancelOrder';
 
 // Reducer
@@ -25,7 +26,8 @@ const initialState = {
     meat: 1,
   },
   price: BASE_PRICE,
-  isOrdering: false,
+  isOrdering: false, // did the user started the ordering process?
+  isBuilding: false, // has the user edited the burger?
 };
 
 export default function burgerBuilderReducer(state = initialState, action) {
@@ -34,11 +36,13 @@ export default function burgerBuilderReducer(state = initialState, action) {
       return produce(state, (d) => {
         d.ingredients[action.id]++;
         d.price += INGREDIENT_PRICE[action.id];
+        d.isBuilding = true;
       });
     case REMOVE_INGREDIENT:
       return produce(state, (d) => {
         d.ingredients[action.id]--;
         d.price -= INGREDIENT_PRICE[action.id];
+        d.isBuilding = true;
       });
     case FETCH_INGREDIENTS_SUCCESS:
       return produce(state, (d) => {
@@ -50,6 +54,10 @@ export default function burgerBuilderReducer(state = initialState, action) {
         d.isOrdering = false;
       });
     case BEGIN_ORDER:
+      return produce(state, (d) => {
+        d.isOrdering = true;
+      });
+    case SIGN_IN_TO_ORDER:
       return produce(state, (d) => {
         d.isOrdering = true;
       });
@@ -67,6 +75,7 @@ export const addIngredient = (id) => ({ type: ADD_INGREDIENT, id });
 export const removeIngredient = (id) => ({ type: REMOVE_INGREDIENT, id });
 export const beginOrder = () => ({ type: BEGIN_ORDER });
 export const cancelOrder = () => ({ type: CANCEL_ORDER });
+export const signInToOrder = () => ({ type: SIGN_IN_TO_ORDER });
 
 // Thunk Action Dispatchers
 export const fetchIngredients = () => async (dispatch) => {

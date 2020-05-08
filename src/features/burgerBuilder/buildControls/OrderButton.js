@@ -1,9 +1,9 @@
 import React from 'react';
 
-function OrderButton({ handleClick, disabled }) {
+function OrderButton({ handleClick, disabled, isAuthenticated }) {
   return (
     <button className="OrderButton" onClick={handleClick} disabled={disabled}>
-      Order Now
+      {isAuthenticated ? 'Order Now' : 'Log In to Order'}
     </button>
   );
 }

@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import * as actionCreators from '../../app/ducks/burgerBuilder';
+import { setAuthRedirect } from '../../app/ducks/auth';
 
 import Spinner from '../../common/ui/Spinner';
 import Modal from '../../common/ui/Modal';
@@ -18,7 +19,10 @@ export function BurgerBuilder({
   fetchIngredients,
   isOrdering,
   beginOrder,
+  signInToOrder,
   cancelOrder,
+  isAuthenticated,
+  setAuthRedirect,
 }) {
   const [isLoading, setIsLoading] = useState(true);
   const [isFetched, setIsFetched] = useState(false);
@@ -34,8 +38,21 @@ export function BurgerBuilder({
     })();
   }, [fetchIngredients, cancelOrder]);
 
-  const proceedToOrder = () => {
+  /**
+   * proceed to checkout page
+   */
+  const proceedToCheckout = () => {
     history.push('/checkout');
+  };
+
+  const orderNow = () => {
+    if (isAuthenticated) {
+      beginOrder();
+    } else {
+      signInToOrder();
+      setAuthRedirect('/checkout');
+      history.push('/auth');
+    }
   };
 
   return (
@@ -45,7 +62,7 @@ export function BurgerBuilder({
         <OrderSummary
           ingredients={ingredients}
           cancelOrder={cancelOrder}
-          continueOrder={proceedToOrder}
+          proceedToCheckout={proceedToCheckout}
         />
       </Modal>
       <section className="BurgerBuilder__burger-wrapper">
@@ -56,7 +73,8 @@ export function BurgerBuilder({
         ingredients={ingredients}
         add={addIngredient}
         remove={removeIngredient}
-        beginOrder={beginOrder}
+        orderNow={orderNow}
+        isAuthenticated={isAuthenticated}
       />
     </div>
   );
@@ -65,9 +83,12 @@ export function BurgerBuilder({
 const mapState = (state) => {
   const {
     burgerBuilder: { ingredients, price, isOrdering },
+    auth: { idToken },
   } = state;
 
-  return { ingredients, price, isOrdering };
+  return { ingredients, price, isOrdering, isAuthenticated: idToken !== null };
 };
 
-export default connect(mapState, actionCreators)(BurgerBuilder);
+export default connect(mapState, { setAuthRedirect, ...actionCreators })(
+  BurgerBuilder
+);

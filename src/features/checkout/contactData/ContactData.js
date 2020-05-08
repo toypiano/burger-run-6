@@ -4,7 +4,7 @@ import * as actionCreators from '../../../app/ducks/orders';
 
 import useImmer from '../../../common/hooks/useImmer';
 import { validateInput } from '../../../common/validation/inputValidation';
-import { initialOrderForm } from './orderForm.model';
+import { initialOrderForm } from './initialOrderForm';
 import Button from '../../../common/ui/Button';
 import InputGroup from '../../../common/ui/InputGroup';
 
@@ -12,11 +12,11 @@ export function ContactData({ email }) {
   const [orderForm, updateOrderForm] = useImmer(initialOrderForm);
   const [isFormValid, setIsFormValid] = useState(false);
   useEffect(() => {
-    const result = Object.values(orderForm).reduce(
-      (isValid, formObject) => isValid && formObject.valid,
+    const isEveryInputValid = Object.values(orderForm).reduce(
+      (isValid, input) => isValid && input.valid,
       true
     );
-    setIsFormValid(result);
+    setIsFormValid(isEveryInputValid);
   }, [orderForm]);
 
   const handleInputChange = (e, id) => {

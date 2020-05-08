@@ -112,3 +112,140 @@ No. If we do, then two Backdrops will overlap on top of each other making it twi
 ## Position fixed & absolute
 
 Set top & left as well.
+
+## Authentication with Email / Password
+
+Higher level review
+
+### User Story
+
+- Users can sign up / sign in with email and password
+- Upon success, users are redirected to the page they are supposed to be forwarded to (eg. root or checkout page)
+- Upon failure, users can see a error message and stay on the page to re-try.
+- Once authenticated, users can reload the page and still be logged in.
+- Once authenticated, users can access authorized page links in the navbar (eg. orders, signout)
+- In the orders page, only the orders made by the currently logged-in user are displayed.
+- Users are logged out automatically when the token received from initial log-in expires.
+- While logged in, some fields in the order form are pre-filled with the user information (eg. email).
+- Page paths are guarded against un-authorized users. (un-authorized users cannot go to pages by typing into the address bar)
+
+#### States
+
+- isAuthenticated? - you can get this from `idToken !== null` check
+- expirationDate? - you can only save this to the localStorage and use it when the user reloads the page to check auth status. If you need to check expirationDate in other components, you can store it in state.
+- idToken - access token that expires after certain time
+- localId - id of the user
+- error
+- authRedirectPath - set redirection path after login/signUp based on state in other components
+
+### Implementations
+
+#### Redirection
+
+- Redirect users to checkout if burger is touched or visited auth from clicking 'log in to order' button on BurgerBuilder page.
+- In `orderNow` function @BurgerBuilder
+
+### Caveats
+
+### Related Components in Application
+
+- `NavItems` - renders a list of NavItem's based on `isAuthenticated`
+- BurgerBuilder > BuildControls > `OrderButton` - Display "Sign In to ORder" when not authenticated. Display "Order Now" when it is.
+
+## Action Creators vs Thunk Creators
+
+- Return action object from action creators
+
+```js
+export const clearLogoutTimeout = () => {
+  clearTimeout(timeoutId);
+  // you will dispatch this action somewhere
+  return { type: LOGOUT_TIMEOUT_CLEAR };
+};
+```
+
+- Dispatch action creators | thunk creators from thunk
+
+If you return an action inside a thunk just like you do in action creators:
+
+```js
+// Thunk creator
+export const setLogoutTimeout = (remainingTime) => {
+  // Thunk
+  return function setLogoutTimeoutThunk(dispatch) {
+    // Use thunk when you need to dispatch another action | thunk creators
+    timeoutId = setTimeout(() => dispatch(logOut()), remainingTime);
+    // this will not do anything
+    return setLogoutTimeout();
+  };
+};
+```
+
+You have to "dispatch" actions inside a thunk
+
+```js
+export const setLogoutTimeout = (remainingTime) => {
+  console.log(remainingTime);
+  return function setLogoutTimeoutThunk(dispatch) {
+    // logOut is a thunk creator
+    timeoutId = setTimeout(() => dispatch(logOut()), remainingTime);
+    // middleware only runs the thunk. It doesn't dispatch the returned value
+    dispatch({ type: LOGOUT_TIMEOUT_SET });
+  };
+};
+```
+
+## Async Thunk - return Promise
+
+Return `Promise.reject()` from the catch block inside async thunk in order to chain the result in the component that dispatches the thunk creator.
+
+### Example
+
+You want to run mapped dispatch 'auth' inside a submit handler and take down the spinner if the dispatched thunk catches an error.
+
+```js
+const handleFormSubmit = async (e) => {
+  e.preventDefault();
+  setIsLoading(true);
+  try {
+    await auth(authForm.email.value, authForm.password.value, isSignIn);
+    // when authenticated, redirect happens and Auth unmounts
+    // so no need to setIsLoading on unmounted component
+  } catch (err) {
+    // only turn off spinner when auth throws error
+    setIsLoading(false);
+  }
+};
+```
+
+But if you don't return Promise from the thunk, the promise is settled within the thunk's catch block. So the error is never passed to the catch block inside the submit handler.
+
+```js
+export const auth = (email, password, isSignIn) => {
+  return async function authThunk(dispatch) {
+    // do some prep
+    // ...
+    try {
+      const response = await axios.post(uri, payload);
+      console.log(response);
+
+      // store user info & remaining time to token expiration into the localStorage
+      // ...
+      dispatch(setLogoutTimeout(remainingTime));
+      dispatch(authSuccess(response.data));
+    } catch (err) {
+      dispatch(authFail(err));
+      // no Promise returned. done(settled).
+    }
+  };
+};
+```
+
+Return a rejected Promise so that it can be further chained inside another catch block.
+
+```js
+} catch (err) {
+      dispatch(authFail(err));
+      return Promise.reject(err);
+    }
+```

@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 function NavItem({ to, exact, children }) {
   return (
@@ -11,7 +12,7 @@ function NavItem({ to, exact, children }) {
   );
 }
 
-export default function NavItems() {
+export function NavItems({ isAuthenticated }) {
   return (
     <ul className="NavItems">
       <NavItem to="/" exact>
@@ -20,12 +21,23 @@ export default function NavItems() {
       <NavItem to="/orders" exact>
         Orders
       </NavItem>
-      <NavItem to="/signout" exact>
-        Sign Out
-      </NavItem>
-      <NavItem to="/auth" exact>
-        Sign In
-      </NavItem>
+      {isAuthenticated ? (
+        <NavItem to="/signout" exact>
+          Sign Out
+        </NavItem>
+      ) : (
+        <NavItem to="/auth" exact>
+          Sign In
+        </NavItem>
+      )}
     </ul>
   );
 }
+
+const mapState = (state) => {
+  const {
+    auth: { idToken },
+  } = state;
+  return { isAuthenticated: idToken !== null };
+};
+export default connect(mapState)(NavItems);

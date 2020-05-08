@@ -1,7 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const StyledInput = styled.div``;
+const StyledInput = styled.div`
+  font: inherit;
+  margin: 1em;
+`;
 function Input({
   inputType,
   config,

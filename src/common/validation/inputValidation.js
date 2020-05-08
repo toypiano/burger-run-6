@@ -26,6 +26,5 @@ export function validateInput(value, rules) {
     return false;
   }
 
-  console.error('Rules passed but not handled');
   return true;
 }

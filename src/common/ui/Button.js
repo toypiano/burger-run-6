@@ -5,9 +5,14 @@ const StyledButton = styled.button`
   font: inherit;
 `;
 
-function Button({ children, handleClick, disabled }) {
+function Button({ children, handleClick, disabled, type, variant }) {
   return (
-    <StyledButton onClick={handleClick} disabled={disabled}>
+    <StyledButton
+      onClick={handleClick}
+      disabled={disabled}
+      type={type}
+      variant={variant}
+    >
       {children}
     </StyledButton>
   );

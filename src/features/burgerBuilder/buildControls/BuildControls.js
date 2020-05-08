@@ -14,7 +14,14 @@ function BuildControl({ label, less, more, disabled }) {
   );
 }
 
-function BuildControls({ price, ingredients, add, remove, beginOrder }) {
+function BuildControls({
+  price,
+  ingredients,
+  add,
+  remove,
+  orderNow,
+  isAuthenticated,
+}) {
   const buildControls = Object.keys(ingredients).map((ing) => (
     <BuildControl
       key={ing}
@@ -38,8 +45,9 @@ function BuildControls({ price, ingredients, add, remove, beginOrder }) {
       </p>
       {buildControls}
       <OrderButton
-        handleClick={beginOrder}
+        handleClick={orderNow}
         disabled={!isAtLeastOneIngredient()}
+        isAuthenticated={isAuthenticated}
       />
     </div>
   );

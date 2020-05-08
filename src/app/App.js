@@ -1,13 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import * as actionCreators from './ducks/auth';
 import { Switch, Route, useRouteMatch } from 'react-router-dom';
 
 import Layout from './layout/Layout';
 import BurgerBuilder from '../features/burgerBuilder/BurgerBuilder';
 import Checkout from '../features/checkout/Checkout';
+import Auth from '../features/auth/Auth';
+import SignOut from '../features/auth/SignOut';
 
-function App() {
+export function App({ isAuthenticated, checkAuthStatus }) {
   // returns match object if current location matches the given path
   const match = useRouteMatch(['/checkout']);
+  useEffect(() => {
+    checkAuthStatus();
+  }, [checkAuthStatus]);
 
   const routes = (
     <Switch>
@@ -16,6 +23,12 @@ function App() {
       </Route>
       <Route path="/checkout">
         <Checkout match={match} />
+      </Route>
+      <Route path="/signout">
+        <SignOut />
+      </Route>
+      <Route path="/auth">
+        <Auth />
       </Route>
     </Switch>
   );
@@ -26,4 +39,7 @@ function App() {
   );
 }
 
-export default App;
+const mapState = (state) => ({
+  inAuthenticated: state.auth.idToken !== null,
+});
+export default connect(mapState, actionCreators)(App);
