@@ -1,5 +1,6 @@
 import React from 'react';
 import Button from '../../common/ui/Button';
+import { addEmoji } from '../../common/utils';
 
 /**
  * Show selected ingredients with cancel & continue Button
@@ -8,7 +9,7 @@ import Button from '../../common/ui/Button';
 function OrderSummary({ ingredients, cancelOrder, proceedToCheckout }) {
   const ingredientLists = Object.entries(ingredients).map(([ing, qty]) => (
     <li key={ing}>
-      <span className="OrderSummary__ingredient">{ing}</span>
+      <span className="OrderSummary__ingredient">{addEmoji(ing)}</span>
       <span className="OrderSummary__quantity">{qty}</span>
     </li>
   ));
@@ -18,8 +19,12 @@ function OrderSummary({ ingredients, cancelOrder, proceedToCheckout }) {
       <p>A tasty burger with the following ingredients!</p>
       <ul>{ingredientLists}</ul>
       <div className="OrderSummary__buttons">
-        <Button handleClick={cancelOrder}>Cancel</Button>
-        <Button handleClick={proceedToCheckout}>Continue</Button>
+        <Button variant="danger" handleClick={cancelOrder}>
+          Cancel
+        </Button>
+        <Button variant="success" handleClick={proceedToCheckout}>
+          Continue
+        </Button>
       </div>
     </div>
   );

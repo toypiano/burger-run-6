@@ -1,27 +1,61 @@
-$z-backdrop: 50;
-$z-spinner: 100;
-
-// CSS variables ======================
+@import url('https://fonts.googleapis.com/css?family=Playfair+Display:400,700,900&display=swap');
+// ============================================
+// Variables
+// ============================================
 :root {
   // colors
+  --cl-primary: #cc8b29;
+  --cl-secondary: #774319;
   --cl-light: #fff;
+  --cl-gray-dark: #bbb;
+  --cl-gray: #ccc;
+  --cl-gray-light: #eee;
+  --cl-dark: hsla(0, 0%, 0%, 1);
+  --cl-accent: #f0c33d;
+  --cl-success: #396f3a;
+  --cl-danger: #bf3813;
+
+  // typography
+  --ff-s: 'Playfair Display', serif;
+  --ff-ss: Roboto, sans-serif;
+
+  --fz-h2: 1.5em;
+
+  --fw-normal: 400;
+  --fw-bold: 700;
+  --fw-black: 900;
 
   // dimensions
   --height-navbar: 3.75rem;
 
   // z-index
+  --z-backdrop: 50;
   --z-side-drawer: 75;
+  --z-modal: 100;
+  --z-spinner: 200;
 }
+// Breakpoints
+$bp-sm: 576px;
 
-// Mixins ==============================
+// ============================================
+// Mixins
+// ============================================
 
 @mixin media-sm() {
-  @media (min-width: 576px) {
+  @media (min-width: $bp-sm) {
     @content;
   }
 }
 
-// Globals =============================
+@mixin shadow() {
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.07),
+    0 4px 8px rgba(0, 0, 0, 0.07), 0 8px 16px rgba(0, 0, 0, 0.07),
+    0 16px 32px rgba(0, 0, 0, 0.07), 0 32px 64px rgba(0, 0, 0, 0.07);
+}
+
+// ============================================
+// Global Rules
+// ============================================
 html {
   box-sizing: border-box;
 }
@@ -34,9 +68,9 @@ html {
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: var(--ff-ss), -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
+    'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -48,4 +82,45 @@ p {
   margin-top: 0;
   margin-bottom: 0.5em;
   line-height: 1.6;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+li {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  cursor: pointer;
+  text-decoration: none;
+  margin: 0;
+  padding: 0;
+}
+
+button {
+  font: inherit;
+  border: none;
+  cursor: pointer;
+  background: transparent; // remove button's default background
+  &:disabled {
+    opacity: 0.5;
+    filter: saturate(0);
+    cursor: not-allowed;
+  }
+}
+
+// ============================================
+// Queries
+// ============================================
+
+// set max-width = min-width - 1
+@media (max-width: $bp-sm - 1) {
+  .desktop-only {
+    display: none;
+  }
 }

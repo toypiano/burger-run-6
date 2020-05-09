@@ -1,15 +1,22 @@
 import React from 'react';
 import Button from '../../../common/ui/Button';
 import OrderButton from './OrderButton';
+import { addEmoji } from '../../../common/utils';
 
 function BuildControl({ label, less, more, disabled }) {
   return (
     <div className="BuildControl">
-      <label>{label}</label>
-      <Button handleClick={less} disabled={disabled}>
+      <label>{addEmoji(label)}</label>
+      <Button
+        variant="outline-secondary"
+        handleClick={less}
+        disabled={disabled}
+      >
         Less
       </Button>
-      <Button handleClick={more}>More</Button>
+      <Button variant="secondary" handleClick={more}>
+        More
+      </Button>
     </div>
   );
 }

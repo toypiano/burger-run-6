@@ -12,9 +12,12 @@ function NavItem({ to, exact, children }) {
   );
 }
 
-export function NavItems({ isAuthenticated }) {
+export function NavItems({ isAuthenticated, desktopOnly, handleClick }) {
   return (
-    <ul className="NavItems">
+    <ul
+      className={`NavItems ${desktopOnly ? 'desktopOnly' : null}`}
+      onClick={handleClick}
+    >
       <NavItem to="/" exact>
         BurgerBuilder
       </NavItem>

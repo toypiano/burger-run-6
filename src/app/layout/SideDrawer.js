@@ -7,7 +7,7 @@ export default function SideDrawer({ isOpen, closeDrawer }) {
     <div className="SideDrawer">
       <Backdrop show={isOpen} handleClick={closeDrawer} />
       <nav className={isOpen ? 'open' : null}>
-        <NavItems />
+        <NavItems handleClick={closeDrawer} />
       </nav>
     </div>
   );

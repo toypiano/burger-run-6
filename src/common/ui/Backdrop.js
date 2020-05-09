@@ -7,8 +7,9 @@ const StyledBackdrop = styled.div`
   bottom: 0;
   left: 0;
   right: 0;
-  background: rgba(0, 0, 0, 0.7);
-  z-index: $z-backdrop;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  z-index: var(--z-backdrop);
   transition: opacity 150ms ease-in;
   opacity: ${(props) => (props.show ? 1 : 0)};
 `;

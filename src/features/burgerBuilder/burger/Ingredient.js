@@ -1,7 +1,7 @@
 import React from 'react';
 
-function Ingredient({ type }) {
-  return <div className={`Ingredient Ingredient__${type}`}>{type}</div>;
+function Ingredient({ type, children }) {
+  return <div className={`Ingredient Ingredient--${type}`}>{children}</div>;
 }
 
 export default Ingredient;

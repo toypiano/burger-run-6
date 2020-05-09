@@ -12,7 +12,10 @@ function mapIngredients(ingredients) {
 function Burger({ ingredients }) {
   return (
     <div className="Burger">
-      <Ingredient type="bread-top" />
+      <Ingredient type="bread-top">
+        <Ingredient type="seeds1" />
+        <Ingredient type="seeds2" />
+      </Ingredient>
       {mapIngredients(ingredients)}
       <Ingredient type="bread-bottom" />
     </div>

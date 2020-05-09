@@ -6,10 +6,12 @@ import { ReactComponent as Logo } from '../../common/images/a-w.svg';
 
 export default function Navbar({ openDrawer }) {
   return (
-    <div className="Navbar">
+    <header className="Navbar">
       <MenuIcon handleClick={openDrawer} />
       <Logo className="Navbar__Logo" />
-      <NavItems />
-    </div>
+      <nav className="desktop-only">
+        <NavItems />
+      </nav>
+    </header>
   );
 }

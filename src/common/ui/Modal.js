@@ -9,12 +9,15 @@ const toggleSlide = (props) =>
 const StyledModal = styled.div`
   .Modal__content {
     position: fixed;
+    z-index: var(--z-modal);
     width: 80%;
     max-width: 30rem;
     left: 50vw;
     top: 50vh;
-    transition: transform 200ms ease-in-out;
     transform: translate(-50%, -50%) ${toggleSlide};
+    padding: 2em 1em;
+    border-radius: 8px;
+    transition: transform 200ms ease-in-out;
     background: var(--cl-light);
     text-align: center;
   }

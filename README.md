@@ -65,6 +65,21 @@ function ListItemLink({ to, ...rest }) {
 }
 ```
 
+## Try on next run
+
+### Design first approach
+
+- Good design makes it easier to understand & use UI
+- This in turn, makes it easier and pleasant to work with business logic.
+- Also components are more static, so you don't have to tinker with state to show components you want to style.
+- Start with minimal Route setup. Navigate through typing path into address bar.
+- Then finish styling components without functionality
+- Then work on logic
+  - event handlers
+  - form input binding
+  - form & input validation
+  - authentication
+
 ## Components
 
 ### Modal
@@ -248,4 +263,17 @@ Return a rejected Promise so that it can be further chained inside another catch
       dispatch(authFail(err));
       return Promise.reject(err);
     }
+```
+
+## `backdrop-filter`
+
+Apply android-like backdrop
+
+```css
+.Backdrop {
+  /* ... */
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  /* ... */
+}
 ```

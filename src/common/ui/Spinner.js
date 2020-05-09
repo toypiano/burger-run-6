@@ -6,7 +6,7 @@ import classes from './Spinner.module.css';
 const StyledSpinner = styled.div`
   .loader {
     position: fixed;
-    z-index: $z-spinner;
+    z-index: var(--z-spinner);
     top: 50vh;
     left: 50vw;
     transform: translate(-50%, calc(-50%));
