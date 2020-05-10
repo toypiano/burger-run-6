@@ -1,0 +1,20 @@
+.Auth {
+  position: absolute;
+  left: 0;
+  right: 0;
+  width: 100vw;
+  min-height: 100vh;
+  background: var(--cl-primary-light);
+  padding-top: 5em;
+  form {
+    max-width: 400px;
+    margin: auto;
+    background: white;
+    padding: 5em 2em 10em;
+    border-radius: 8px;
+  }
+  h1 {
+    font-weight: normal;
+    font-size: 1.5rem;
+  }
+}

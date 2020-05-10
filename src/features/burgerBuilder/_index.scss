@@ -5,7 +5,7 @@
     position: relative;
     display: grid;
     place-items: center;
-    background: rgba(231, 216, 168, 0.2);
+    background: var(--cl-primary-light);
   }
   .BuildControls {
     background: var(--cl-primary);

@@ -3,6 +3,8 @@
 
   .Navbar {
     position: fixed;
+    z-index: var(--z-navbar);
+
     top: 0;
     left: 0;
     width: 100%;

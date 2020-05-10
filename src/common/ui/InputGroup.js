@@ -1,10 +1,37 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+
+const invalidCss = css`
+  border: 1px solid red;
+  background: rgba(255, 240, 240, 0.8);
+`;
 
 const StyledInput = styled.div`
   font: inherit;
-  margin: 1em;
+  font-size: 1.2rem;
+  padding: 0.5em 1em;
+  width: 100%;
+  border: 1px solid var(--cl-gray);
+  border-radius: 8px;
+  margin: 0.5em 0 1.25em;
+  ${(props) => (props.touched && !props.valid ? invalidCss : null)}
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  }
+  ::placeholder {
+    opacity: 0.8;
+  }
 `;
+
+const StyledInputGroup = styled.div`
+  label {
+    display: block;
+    opacity: 0.9;
+  }
+`;
+
 function Input({
   inputType,
   config,
@@ -69,8 +96,6 @@ function Input({
       throw new Error('invalid input type');
   }
 }
-
-const StyledInputGroup = styled.div``;
 
 function InputGroup({
   inputType,

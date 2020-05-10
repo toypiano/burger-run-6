@@ -59,7 +59,7 @@ export function ContactData({ email }) {
       <h2>Order Form</h2>
       <form onSubmit={handleFormSubmit}>
         {inputControls}
-        <Button variant="success" disabled={!isFormValid}>
+        <Button variant="secondary" disabled={!isFormValid}>
           Order
         </Button>
       </form>

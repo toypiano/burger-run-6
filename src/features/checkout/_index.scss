@@ -1,0 +1,57 @@
+.CheckoutSummary {
+  h2 {
+    text-align: center;
+    margin: 1em 0 0;
+    font-weight: normal;
+    opacity: 0.8;
+  }
+  &__burger-wrapper {
+    width: 300px;
+    height: 250px;
+    margin: auto;
+  }
+  &__buttons {
+    width: 80%;
+    max-width: 500px;
+    margin: 1em auto 2em;
+    display: grid;
+    grid-auto-columns: min-content;
+    grid-template-columns: repeat(auto-fit, minmax(10em, 1fr));
+    grid-gap: 0.25em;
+  }
+}
+
+.ContactData {
+  background: var(--cl-accent);
+  padding: 2em 2em 10em;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 600px;
+  margin: 2em auto 10em;
+  h2 {
+    text-align: center;
+  }
+  form {
+    width: 100%;
+    max-width: 500px;
+    margin: auto;
+    display: grid;
+
+    .Button {
+      margin-top: 1em;
+      &:not(:disabled) {
+        animation: enabled 300ms ease-in-out;
+      }
+      @keyframes enabled {
+        0% {
+          opacity: 0;
+          transform: translateY(1em);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    }
+  }
+}

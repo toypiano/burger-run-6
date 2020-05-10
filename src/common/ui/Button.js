@@ -36,6 +36,21 @@ const successCss = css`
     filter: brightness(1.1);
   }
 `;
+
+const outlineSuccessCss = css`
+  background: transparent;
+  border: 2px solid var(--cl-success);
+  color: var(--cl-success);
+
+  &:hover {
+    color: var(--cl-light);
+    background: var(--cl-success);
+  }
+  &:focus {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+  }
+`;
+
 const dangerCss = css`
   background: var(--cl-danger);
   border: 2px solid var(--cl-danger);
@@ -55,6 +70,8 @@ const getVariantCss = (variant) => {
       return outlineSecondaryCss;
     case 'success':
       return successCss;
+    case 'outline-success':
+      return outlineSuccessCss;
     case 'danger':
       return dangerCss;
     default:
@@ -71,6 +88,7 @@ const StyledButton = styled.button`
   border-radius: 5px;
   min-width: 5em;
   margin: 0 0.25em;
+  transition: all 200ms ease;
   ${(props) => getVariantCss(props.variant)}
   &:active {
     filter: brightness(1.1) opacity(0.8);

@@ -101,8 +101,8 @@ export function Auth({
       {/* TODO: do we really need show prop in Spinner? */}
       {isLoading && <Spinner show={isLoading} />}
       {isAuthenticated && <Redirect to={authRedirectPath} />}
-      <h1>Are you a member?</h1>
       <form onSubmit={handleFormSubmit}>
+        <h1>Please sign in</h1>
         <div className="Auth__buttons">
           {inputControls}
           <Button type="submit" variant="success" disabled={!isFormValid}>

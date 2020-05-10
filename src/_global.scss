@@ -4,6 +4,7 @@
 // ============================================
 :root {
   // colors
+  --cl-primary-light: rgba(246, 236, 204, 0.246);
   --cl-primary: #cc8b29;
   --cl-secondary: #774319;
   --cl-light: #fff;
@@ -29,6 +30,7 @@
   --height-navbar: 3.75rem;
 
   // z-index
+  --z-navbar: 10;
   --z-backdrop: 50;
   --z-side-drawer: 75;
   --z-modal: 100;
