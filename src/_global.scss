@@ -12,7 +12,9 @@
   --cl-gray: #ccc;
   --cl-gray-light: #eee;
   --cl-dark: hsla(0, 0%, 0%, 1);
-  --cl-accent: #f0c33d;
+  $accent: #f0c33d;
+  --cl-accent: #{$accent};
+  --cl-accent-bg: #{transparentize($accent, 0.1)};
   --cl-success: #396f3a;
   --cl-danger: #bf3813;
 

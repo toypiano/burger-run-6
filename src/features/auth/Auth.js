@@ -102,7 +102,7 @@ export function Auth({
       {isLoading && <Spinner show={isLoading} />}
       {isAuthenticated && <Redirect to={authRedirectPath} />}
       <form onSubmit={handleFormSubmit}>
-        <h1>Please sign in</h1>
+        <h1>Please {isSignIn ? 'sign in' : 'sign up'}</h1>
         <div className="Auth__buttons">
           {inputControls}
           <Button type="submit" variant="success" disabled={!isFormValid}>

@@ -1,11 +1,14 @@
 .BurgerBuilder {
   &__burger-wrapper {
     width: 100vw;
-    height: 300px;
+    height: 350px;
     position: relative;
     display: grid;
     place-items: center;
     background: var(--cl-primary-light);
+    .Burger {
+      height: 90%;
+    }
   }
   .BuildControls {
     background: var(--cl-primary);

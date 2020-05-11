@@ -1,19 +1,24 @@
 .CheckoutSummary {
   h2 {
     text-align: center;
-    margin: 1em 0 0;
+    margin: 1em 0 1em;
     font-weight: normal;
-    opacity: 0.8;
+    color: var(--cl-secondary);
+    animation: appear 1.5s linear;
+    @keyframes appear {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
   }
-  &__burger-wrapper {
-    width: 300px;
-    height: 250px;
-    margin: auto;
-  }
+
   &__buttons {
     width: 80%;
     max-width: 500px;
-    margin: 1em auto 2em;
+    margin: 1.5em auto 2em;
     display: grid;
     grid-auto-columns: min-content;
     grid-template-columns: repeat(auto-fit, minmax(10em, 1fr));
@@ -22,7 +27,7 @@
 }
 
 .ContactData {
-  background: var(--cl-accent);
+  background: var(--cl-accent-bg);
   padding: 2em 2em 10em;
   border-radius: 8px;
   width: 90%;

@@ -14,7 +14,8 @@ const StyledBurger = styled.div`
   width: 80%;
   min-width: 300px;
   max-width: 350px;
-  height: 90%;
+  height: 100%;
+  padding: 1em 0;
   background: white;
   border-radius: 20px;
   display: flex;
