@@ -335,3 +335,47 @@ const Rotate = styled.div`
 `;
 render(<Rotate>&lt; 💅 &gt;</Rotate>);
 ```
+
+## Guarding routes with React Router
+
+Place authorized `<Routes />` inside `<Switch />` component and add a default route at the end with `<Redirect />` component.
+
+Return only authorized routes
+
+```jsx
+const routes = (
+  <Switch>
+    <Route path="/" exact>
+      <BurgerBuilder />
+    </Route>
+    <Route path="/auth">
+      <Auth />
+    </Route>
+    <Redirect to="/" />
+  </Switch>
+);
+
+const authenticatedRoutes = (
+  <Switch>
+    <Route path="/" exact>
+      <BurgerBuilder />
+    </Route>
+    <Route path="/checkout">
+      <Checkout match={match} />
+    </Route>
+    <Route path="/orders">
+      <Orders />
+    </Route>
+    <Route path="/signout">
+      <SignOut />
+    </Route>
+    <Redirect to="/" />
+  </Switch>
+);
+
+return (
+  <div className="App">
+    <Layout>{isAuthenticated ? authenticatedRoutes : routes}</Layout>
+  </div>
+);
+```

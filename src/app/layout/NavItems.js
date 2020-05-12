@@ -21,13 +21,15 @@ export function NavItems({ isAuthenticated, desktopOnly, handleClick }) {
       <NavItem to="/" exact>
         BurgerBuilder
       </NavItem>
-      <NavItem to="/orders" exact>
-        Orders
-      </NavItem>
       {isAuthenticated ? (
-        <NavItem to="/signout" exact>
-          Sign Out
-        </NavItem>
+        <>
+          <NavItem to="/orders" exact>
+            Orders
+          </NavItem>
+          <NavItem to="/signout" exact>
+            Sign Out
+          </NavItem>
+        </>
       ) : (
         <NavItem to="/auth" exact>
           Sign In
