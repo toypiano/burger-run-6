@@ -3,14 +3,20 @@
     text-align: center;
     margin: 1em 0 1em;
     font-weight: normal;
+    font-style: italic;
     color: var(--cl-secondary);
-    animation: appear 1.5s linear;
-    @keyframes appear {
+    opacity: 0;
+    animation: slide-in 300ms ease-in-out;
+    animation-fill-mode: forwards;
+    position: relative;
+    @keyframes slide-in {
       0% {
         opacity: 0;
+        right: 100%;
       }
       100% {
         opacity: 1;
+        right: 0;
       }
     }
   }
@@ -28,7 +34,7 @@
 
 .ContactData {
   background: var(--cl-accent-bg);
-  padding: 2em 2em 10em;
+  padding: 2em 2em 7em;
   border-radius: 8px;
   width: 90%;
   max-width: 600px;

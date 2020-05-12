@@ -277,3 +277,61 @@ Apply android-like backdrop
   /* ... */
 }
 ```
+
+## Reducer switch statement inside Immer draft updater
+
+Place state statement inside updater function to call produce only once.
+
+```js
+export default function ordersReducer(state = initialState, action) {
+  return produce(state, (draft) => {
+    switch (action.type) {
+      case POST_ORDER_SUCCESS:
+        draft.error = null;
+        return;
+      case POST_ORDER_FAIL:
+        draft.error = action.error;
+        return;
+      case GET_ORDERS_SUCCESS: {
+        const orders = Object.entries(action.orders).map(([id, order]) => ({
+          id,
+          ...order,
+        }));
+        draft.orders = orders;
+        draft.error = null;
+        return;
+      }
+      case GET_ORDERS_FAIL:
+        draft.error = action.error;
+        return;
+      default:
+        return;
+    }
+  });
+}
+```
+
+## CSS @keyframes is not scoped
+
+CSS animation name you define with `@keyframe` isn't scoped within a component with styled-component.  
+You can use `keyframes` helper to scope animation per component.
+
+```jsx
+// Create the keyframes
+const rotate = keyframes`
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+`;
+// Here we create a component that will rotate everything we pass in over two seconds
+const Rotate = styled.div`
+  display: inline-block;
+  animation: ${rotate} 2s linear infinite;
+  padding: 2rem 1rem;
+  font-size: 1.2rem;
+`;
+render(<Rotate>&lt; 💅 &gt;</Rotate>);
+```

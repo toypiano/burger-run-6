@@ -7,7 +7,7 @@ const emoji = {
 };
 
 export const addEmoji = (label) => {
-  return emoji[label] + label;
+  return emoji[label] + ' ' + label;
 };
 
 /**

@@ -8,6 +8,7 @@ import BurgerBuilder from '../features/burgerBuilder/BurgerBuilder';
 import Checkout from '../features/checkout/Checkout';
 import Auth from '../features/auth/Auth';
 import SignOut from '../features/auth/SignOut';
+import Orders from '../features/orders/Orders';
 
 export function App({ isAuthenticated, checkAuthStatus }) {
   // returns match object if current location matches the given path
@@ -23,6 +24,9 @@ export function App({ isAuthenticated, checkAuthStatus }) {
       </Route>
       <Route path="/checkout">
         <Checkout match={match} />
+      </Route>
+      <Route path="/orders">
+        <Orders />
       </Route>
       <Route path="/signout">
         <SignOut />

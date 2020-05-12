@@ -4,7 +4,7 @@ import * as actionCreators from '../../app/ducks/orders';
 import { useHistory, useRouteMatch } from 'react-router-dom';
 
 import CheckoutSummary from './CheckoutSummary';
-import { ContactData } from './contactData/ContactData';
+import ContactData from './contactData/ContactData';
 
 export function Checkout({ ingredients, match }) {
   const history = useHistory();

@@ -94,9 +94,9 @@ const StyledButton = styled.button`
     filter: brightness(1.1) opacity(0.8);
     position: relative;
   }
-  &:focus {
+  /* &:focus {
     outline: none;
-  }
+  } */
 `;
 
 function Button({ children, handleClick, disabled, type, variant }) {

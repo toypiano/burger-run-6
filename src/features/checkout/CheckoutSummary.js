@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import Burger from '../burgerBuilder/burger/Burger';
 import Button from '../../common/ui/Button';
 import { getBurgerHeight } from '../../common/utils/';
@@ -14,6 +14,12 @@ const moveUp = (ingredients) => {
   `;
 };
 
+const appear = keyframes`
+  100% {
+    opacity: 1;
+  }  
+`;
+
 const StyledBurgerWrapper = styled.div`
   width: 300px;
   height: ${wrapperHeight}px;
@@ -21,6 +27,10 @@ const StyledBurgerWrapper = styled.div`
   .Burger {
     background: transparent;
     justify-content: flex-end;
+    opacity: 0;
+    animation: ${appear} 200ms ease-out;
+    animation-fill-mode: forwards;
+    animation-delay: 600ms;
   }
   background: transparent;
   ${(props) => moveUp(props.ingredients)}
@@ -33,7 +43,10 @@ function CheckoutSummary({
 }) {
   return (
     <div className={`CheckoutSummary`}>
-      <h2>Your burger is ready for order!</h2>
+      <h2>
+        Your burger is <strong>ready for order!</strong>
+      </h2>
+
       <StyledBurgerWrapper
         ingredients={ingredients}
         className="CheckoutSummary__burger-wrapper"

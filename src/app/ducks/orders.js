@@ -16,28 +16,31 @@ const initialState = {
 };
 
 export default function ordersReducer(state = initialState, action) {
-  switch (action.type) {
-    case POST_ORDER_SUCCESS:
-      return produce(state, (d) => {
+  return produce(state, (draft) => {
+    switch (action.type) {
+      case POST_ORDER_SUCCESS:
+        draft.error = null;
+        return;
+      case POST_ORDER_FAIL:
+        draft.error = action.error;
+        return;
+      case GET_ORDERS_SUCCESS: {
         // transform orders object into an array of orders
         const orders = Object.entries(action.orders).map(([id, order]) => ({
           id,
           ...order,
         }));
-        d.orders.orders = orders;
-        d.error = null;
-      });
-    case POST_ORDER_FAIL:
-      return produce(state, (d) => {
-        d.error = action.error;
-      });
-    case GET_ORDERS_FAIL:
-      return produce(state, (d) => {
-        d.error = action.error;
-      });
-    default:
-      return state;
-  }
+        draft.orders = orders;
+        draft.error = null;
+        return;
+      }
+      case GET_ORDERS_FAIL:
+        draft.error = action.error;
+        return;
+      default:
+        return;
+    }
+  });
 }
 
 // Action Creators
@@ -67,8 +70,10 @@ export const postOrder = (order, idToken) => async (dispatch) => {
     dispatch(postOrderRequest(order));
     const response = await axios.post(`/orders.json?auth=${idToken}`, order);
     dispatch(postOrderSuccess(response.data.name, order));
+    return response;
   } catch (err) {
     dispatch(postOrderFail(err));
+    return Promise.reject(err);
   }
 };
 export const getOrders = (idToken, localId) => async (dispatch) => {
@@ -77,7 +82,9 @@ export const getOrders = (idToken, localId) => async (dispatch) => {
     const queryParams = `?auth=${idToken}&orderBy="localId"&equalTo="${localId}"`;
     const response = await axios.get(`/orders.json${queryParams}`);
     dispatch(getOrdersSuccess(response.data));
+    return response;
   } catch (err) {
-    dispatch(getOrdersFail(err));
+    dispatch(getOrdersFail(err.response ? err.response.data : err));
+    return Promise.reject(err);
   }
 };

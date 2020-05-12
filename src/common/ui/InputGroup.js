@@ -20,9 +20,12 @@ const StyledInput = styled.div`
     outline: none;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
   }
+  /* style placeholder */
   ::placeholder {
     opacity: 0.8;
   }
+  /* remove chrome's default styling for select element */
+  -webkit-appearance: none;
 `;
 
 const StyledInputGroup = styled.div`
