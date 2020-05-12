@@ -13,7 +13,7 @@ function mapIngredients(ingredients) {
 const StyledBurger = styled.div`
   width: 80%;
   min-width: 300px;
-  max-width: 350px;
+  max-width: 40vh;
   height: 100%;
   padding: 1em 0;
   background: white;

@@ -28,7 +28,7 @@ const StyledBurgerWrapper = styled.div`
     background: transparent;
     justify-content: flex-end;
     opacity: 0;
-    animation: ${appear} 200ms ease-out;
+    animation: ${appear} 100ms ease-in;
     animation-fill-mode: forwards;
     animation-delay: 600ms;
   }

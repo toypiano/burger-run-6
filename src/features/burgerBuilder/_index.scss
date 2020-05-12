@@ -1,7 +1,10 @@
 .BurgerBuilder {
   &__burger-wrapper {
     width: 100vw;
-    height: 350px;
+    height: 40vh;
+    @include media-lg {
+      height: 50vh;
+    }
     position: relative;
     display: grid;
     place-items: center;
