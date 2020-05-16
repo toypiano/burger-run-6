@@ -1,5 +1,20 @@
 # React BurgerBuilder 6
 
+### Screenshots
+
+<table>
+<tr>
+<td><img src="./screenshots/main.png" width="200" alt="main"></td>
+<td><img src="./screenshots/sidebar.png" width="200" alt="sidebar"></td>
+<td><img src="./screenshots/modal.png" width="200" alt="modal"></td>
+</tr>
+<tr>
+<td><img src="./screenshots/auth.png" width="200" alt="authentication"></td>
+<td><img src="./screenshots/order-form.png" width="200" alt="form"></td>
+<td><img src="./screenshots/orders.png" width="200" alt="orders"></td>
+</tr>
+</table>
+
 ## New in this run
 
 - Style-later approach with scss module
