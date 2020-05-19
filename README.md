@@ -394,3 +394,8 @@ return (
   </div>
 );
 ```
+
+## TODOS
+
+- Implement global error handling
+- Add lazy loading
